@@ -1,8 +1,9 @@
 <html>
 <head>
 	<title>Artist visualizer</title>
-	<script type="text/javascript" src="index.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="index.js"></script>
+	<script src="processing.js"></script>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,5 +13,7 @@
 
 	<div id="results" width="500px" height="500px"></div>
 	<button onclick="getArtist()">Get data</button>
+
+	<canvas id="mycanvas" data-processing-sources="studio4.pde Hexagon.pde Artist.pde"></canvas>
 </body>
 </html>
