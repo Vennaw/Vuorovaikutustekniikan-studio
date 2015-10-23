@@ -160,6 +160,13 @@ void draw() {
   background(255);
   for (int i = 0; i < hexcountx; i ++ ) {     
     for (int j = 0; j < hexcounty; j ++ ) {
+      
+      if (hexagon[i][j].isInside(mouseX, mouseY) && hexagon[i][j].visible){
+        hexagon[i][j].hoover = true;
+      } else {
+        hexagon[i][j].hoover = false;
+      }
+
       if (hexagon[i][j].isInside(mouseX, mouseY) && keyPressed && key == ENTER && !hexagon[i][j].visible) {
         hexagon[i][j].setArtist(artists.get(0).data.id, artists.get(0).data.images[0].url);
         hexagon[i][j].visible = true;
@@ -174,8 +181,6 @@ void draw() {
         } else if(i%2 != 0 && j % 2 != 0){
           getRelatedArtists(i, j, true, true, hexagon[i][j].artistID);
         }
-
-        //hexagon[i][j].hoovers();
       }
       if(hexagon[i][j].visible){
         hexagon[i][j].display();

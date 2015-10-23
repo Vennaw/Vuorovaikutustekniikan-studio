@@ -6,6 +6,7 @@ class Hexagon {
   boolean isInside = false;
   boolean visible = false;
   string artistID;
+  boolean hoover = false;
   
   Hexagon(float cx, float cy, float r) {
     x=cx;
@@ -21,7 +22,12 @@ class Hexagon {
       y + radi * sin(radians(angle * i)));
     }
     colorMode(RGB, 255);
-    noFill();
+    
+    if (hoover){
+      fill(100,50,50,150);
+    } else {
+      noFill();
+    }
     if(img){
       imageMode(CENTER);
       image(img, x, y, picDiameter/1.6, picDiameter/1.6);
@@ -36,9 +42,6 @@ class Hexagon {
   }
   
   void hoovers() {
-    if (isInside == true) {
-      stroke(0);
-    } else noStroke();
   }
   
   boolean isInside() {
