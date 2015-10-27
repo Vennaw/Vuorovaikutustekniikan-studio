@@ -7,6 +7,7 @@ class Hexagon {
   boolean visible = false;
   string artistID;
   boolean hoover = false;
+  string artistName;
   
   Hexagon(float cx, float cy, float r) {
     x=cx;
@@ -23,17 +24,25 @@ class Hexagon {
     }
     colorMode(RGB, 255);
     
+    if(img){
+      imageMode(CENTER);
+      image(img, x, y, picDiameter/1.6, picDiameter/1.6);
+    }
+
     if (hoover){
       fill(100,50,50,150);
     } else {
       noFill();
     }
-    if(img){
-      imageMode(CENTER);
-      image(img, x, y, picDiameter/1.6, picDiameter/1.6);
-    }
     
     endShape(CLOSE);
+    if(hoover){
+      fill(255);
+      textSize(14);
+      textAlign(CENTER, CENTER);
+      rectMode(CENTER);
+      text(artistName, x - picDiameter/3.2, y - picDiameter/3.2, picDiameter/1.6, picDiameter/1.6);
+    }
   }
 
   void setArtist(id, imgurl){
