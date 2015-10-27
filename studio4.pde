@@ -2,13 +2,22 @@ Hexagon[][] hexagon;
 
 int rad = 60; //size of the hexagon
 int hexcountx, hexcounty;
-
+float zoom = 1;
+float xo;
+float yo;
 ArrayList artists;
+
+int buttonValue = 1;
+boolean isOpen;
+int myColorBackground = color(0,0,0);
 
 
 void setup() {
   size(1200, 800);
+  xo = width/2;
+  yo = height/2;
   smooth();
+
   background(255);
   frameRate(50); //Specifies the number of frames to be displayed every second.
   hexcountx = parseInt(height/(rad));
@@ -19,7 +28,7 @@ void setup() {
     for (int j = 0; j < hexcounty; j++) {
       if ((j % 2) == 0) {
         hexagon[i][j] = new Hexagon((3 * rad * i), (.866 * rad * j), rad);
-      } 
+      }
       else {
         hexagon[i][j] = new Hexagon(3 * rad * (i + .5), .866 * rad * j, rad);
       }
@@ -40,8 +49,6 @@ Artist getArtists(){
 }
 
 void addRelatedArtists(int i, int j, boolean oddColumn, boolean oddRow, String[] array){
-
-
 
   if(!oddColumn && !oddRow){
     int a = i;
@@ -97,10 +104,6 @@ void addRelatedArtists(int i, int j, boolean oddColumn, boolean oddRow, String[]
     int r = j-1;
   }
 
-
-  
-
-
    for(int k = 0; k < array.length; k++){
     boolean next = false;
         for (int m = 0; m < hexcountx; m ++ ) {     
@@ -149,7 +152,7 @@ void addRelatedArtists(int i, int j, boolean oddColumn, boolean oddRow, String[]
         break;
       }
     } 
-    }
+  }
       
 
   //TODO: Check if hexagon is inside the canvas (otherwise undefined error...)
@@ -158,6 +161,11 @@ void addRelatedArtists(int i, int j, boolean oddColumn, boolean oddRow, String[]
 
 void draw() {
   background(255);
+
+  translate(xo, yo);
+  scale(zoom);
+  translate(-xo, -yo);
+
   for (int i = 0; i < hexcountx; i ++ ) {     
     for (int j = 0; j < hexcounty; j ++ ) {
       if (hexagon[i][j].isInside(mouseX, mouseY) && keyPressed && key == ENTER && !hexagon[i][j].visible) {
@@ -204,3 +212,15 @@ void mouseClicked() {
 }
 
 
+// zooming keys
+  void keyPressed() {
+    if (key == 'i'){
+        zoom += 0.13;
+      } else if (key == 'o') {
+        zoom -= 0.13;
+      } else if (key == 'r') {
+        zoom = 1;
+        xo = width/2;
+        yo = height/2;
+    }
+  }
