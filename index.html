@@ -1,19 +1,43 @@
 <html>
 <head>
-	<title>Artist visualizer</title>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script type="text/javascript" src="index.js"></script>
-	<script src="processing.js"></script>
-	<link rel="stylesheet" href="style.css">
+	<title>Artist network visualizer</title>
+	<script src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script src="js/processing.js"></script>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/buttons.css">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" >
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">      
+	<script src="/socket.io/socket.io.js"></script>
+	 
+	<script type="text/javascript" src="js/recorder.js"> </script>
+	<script type="text/javascript" src="js/recognizer.js"> </script>
 </head>
 <body>
 	<h1>Artist visualizer</h1>
 
+	<div class="container kv-main">
+	<div class="panel-heading">
+		<h4 class="panel-title">Play some music and click the green button to recognize.</h4>
+	</div>
+	<hr>
+	<div class="text-center center-block">
+		<button id="record" class="button button-circle button-action button-jumbo"><i class="fa fa-microphone"></i></button>
+	</div>
+	<hr>
+	<div id="message"></div>
+	<div class="text-center" id="result2"></div>
+	<hr>
+	<h4 class="panel-title">Or type artist in the field and press "Get data".</h4>
+
 	Search artist: <input id="searchField" type="text" name="artist" placeholder="Enter artist name"><br>
-
-	<div id="results" width="500px" height="500px"></div>
 	<button onclick="getArtist()">Get data</button>
+	
 
-	<canvas id="mycanvas" data-processing-sources="studio4.pde Hexagon.pde Artist.pde"></canvas>
+	<canvas id="mycanvas" data-processing-sources="processing/studio4.pde processing/Hexagon.pde processing/Artist.pde"></canvas>
+
+	</div>
+	
 </body>
 </html>
