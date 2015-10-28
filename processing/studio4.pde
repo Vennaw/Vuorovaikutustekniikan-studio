@@ -1,4 +1,5 @@
 Hexagon[][] hexagon;   
+ArrayList visibleHexagons;
 
 int rad = 60; //size of the hexagon
 int hexcountx, hexcounty;
@@ -27,6 +28,7 @@ void setup() {
 
 void resetCanvas(){
   hexagon = new Hexagon [hexcountx][hexcounty];
+  visibleHexagons = new ArrayList();
   artists = new ArrayList();
   for (int i = 0; i < hexcountx; i++) {
     for (int j = 0; j < hexcounty; j++) {
@@ -86,13 +88,11 @@ void addRelatedArtists(int i, int j, boolean oddColumn, boolean oddRow, String[]
 
    for(int k = 0; k < array.length; k++){
     boolean next = false;
-        for (int m = 0; m < hexcountx; m ++ ) {     
-          for (int n = 0; n < hexcounty; n ++ ) {
-            if(hexagon[m][n].artistID == array[k].id){
+        for(Hexagon hex : visibleHexagons){
+            if(hex.artistID == array[k].id){
               next = true;
               break;
             }
-          }
         }
     if(next){
       continue;
@@ -106,31 +106,37 @@ void addRelatedArtists(int i, int j, boolean oddColumn, boolean oddRow, String[]
         addNewArtist(null, array[k]);
         hexagon[a][b].setArtist(array[k].id, imgurl);
         hexagon[a][b].visible = true;
+        visibleHexagons.add(hexagon[a][b]);
 
       }else if(hexagon[c][d] != null && !hexagon[c][d].visible){
         addNewArtist(null, array[k]);
         hexagon[c][d].setArtist(array[k].id, imgurl);
         hexagon[c][d].visible = true;
+        visibleHexagons.add(hexagon[c][d]);
           
       }else if(hexagon[e][f] != null && !hexagon[e][f].visible){
         addNewArtist(null, array[k]);
         hexagon[e][f].setArtist(array[k].id, imgurl);
         hexagon[e][f].visible = true;
+        visibleHexagons.add(hexagon[e][f]);
           
       }else if(hexagon[g][h] != null && !hexagon[g][h].visible){
         addNewArtist(null, array[k]);
         hexagon[g][h].setArtist(array[k].id, imgurl);
         hexagon[g][h].visible = true;
+        visibleHexagons.add(hexagon[g][h]);
           
       }else if(hexagon[o][p] != null && !hexagon[o][p].visible){
         addNewArtist(null, array[k]);
         hexagon[o][p].setArtist(array[k].id, imgurl);
         hexagon[o][p].visible = true;
+        visibleHexagons.add(hexagon[o][p]);
           
       }else if(hexagon[q][r] != null && !hexagon[q][r].visible){
         addNewArtist(null, array[k]);
         hexagon[q][r].setArtist(array[k].id, imgurl);
         hexagon[q][r].visible = true;
+        visibleHexagons.add(hexagon[q][r]);
           
       }
       else{
@@ -153,24 +159,25 @@ void draw() {
   translate(xo,yo);
   scale(zoom);
 
-  for (int i = 0; i < hexcountx; i ++ ) {     
-    for (int j = 0; j < hexcounty; j ++ ) {
-      if (hexagon[i][j].isInside(cursorX, cursorY) && hexagon[i][j].visible){
-        hexagon[i][j].hoover = true;
-        for (int k = 0; k < artists.size(); k++){
-          if (artists.get(k).data.id == hexagon[i][j].artistID)
-            hexagon[i][j].artistName = artists.get(k).data.name;
+  for(Hexagon hex : visibleHexagons){
+    if (hex.isInside(cursorX, cursorY)){
+        hex.hoover = true;
+        for (Artist artist : artists){
+          if (artist.data.id == hex.artistID)
+            hex.artistName = artist.data.name;
         }
       } else {
-        hexagon[i][j].hoover = false;
-      }if(hexagon[i][j].visible){
-        pushMatrix();
-        translate(-xo,-yo);
-        hexagon[i][j].display();
-        popMatrix();
+        hex.hoover = false;
       }
-    }
+
+    pushMatrix();
+    translate(-xo,-yo);
+    hex.display();
+    popMatrix();
+
   }
+      
+    
   
 
 
@@ -187,6 +194,7 @@ void setSeedArtist(){
     hexagon[hexX][hexY].setArtist(artists.get(0).data.id, "default.png", artists.g); 
   }
   hexagon[hexX][hexY].visible = true;
+  visibleHexagons.add(hexagon[hexX][hexY]);
   
   if (hexX % 2 == 0 && hexY % 2 == 0) {
     getRelatedArtists(hexX, hexY, false, false, hexagon[hexX][hexY].artistID);
