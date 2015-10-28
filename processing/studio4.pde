@@ -157,6 +157,10 @@ void draw() {
       
       if (hexagon[i][j].isInside() && hexagon[i][j].visible){
         hexagon[i][j].hoover = true;
+        for (int k = 0; k < artists.size(); k++){
+          if (artists.get(k).data.id == hexagon[i][j].artistID)
+            hexagon[i][j].artistName = artists.get(k).data.name;
+        }
       } else {
         hexagon[i][j].hoover = false;
       }
