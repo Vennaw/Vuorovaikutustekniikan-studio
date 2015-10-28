@@ -18,7 +18,7 @@ class Hexagon {
     similarity = 0;
   }
 
-  void display() {
+  void displayMosaic() {
     beginShape();
     for (int i = 0; i < 6; i++) {
       vertex(x + radi * cos(radians(angle * i)), 
@@ -26,6 +26,35 @@ class Hexagon {
     }
     colorMode(RGB, 255);
     fill(75,250,40, this.similarity * 255);
+    if (hoover){
+      fill(100,50,50,150);
+    }
+    if(img){
+      textSize(14);
+      textAlign(CENTER, CENTER);
+      rectMode(CENTER);
+      text(artistName, x - picDiameter/3.2, y - picDiameter/3.2, picDiameter/1.6, picDiameter/1.6);
+    }
+    
+    endShape(CLOSE);
+
+    if(hoover){
+      fill(255);
+      textSize(14);
+      textAlign(CENTER, CENTER);
+      rectMode(CENTER);
+      text(artistName, x - picDiameter/3.2, y - picDiameter/3.2, picDiameter/1.6, picDiameter/1.6);
+    }
+  }
+
+   void displayPics() {
+    beginShape();
+    for (int i = 0; i < 6; i++) {
+      vertex(x + radi * cos(radians(angle * i)), 
+      y + radi * sin(radians(angle * i)));
+    }
+    colorMode(RGB, 255);
+    noFill();
     if (hoover){
       fill(100,50,50,150);
     }

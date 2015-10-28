@@ -6,10 +6,9 @@ float zoom = 1;
 float xo;
 float yo;
 ArrayList artists;
-
-int buttonValue = 1;
-boolean isOpen;
-int myColorBackground = color(0,0,0);
+int buttonValue; 
+PFont font;
+Button button;
 
 
 void setup() {
@@ -17,6 +16,11 @@ void setup() {
   xo = width/2;
   yo = height/2;
   smooth();
+
+  buttonValue= 0;
+  font = loadFont("LetterGothicStd-32.vlw");
+  textFont(font, 20);
+  button = new Button(60, 60, "Picture Mode");
 
   background(255);
   frameRate(50); //Specifies the number of frames to be displayed every second.
@@ -146,6 +150,7 @@ void addRelatedArtists(int i, int j, boolean oddColumn, boolean oddRow, String[]
 
 void draw() {
   background(255);
+  button.draw(); 
 
   float cursorX = (mouseX-xo)/zoom + xo;
   float cursorY = (mouseY-yo)/zoom + yo;
@@ -163,11 +168,13 @@ void draw() {
         }
       } else {
         hexagon[i][j].hoover = false;
-      }if(hexagon[i][j].visible){
-        pushMatrix();
-        translate(-xo,-yo);
-        hexagon[i][j].display();
-        popMatrix();
+      } if(hexagon[i][j].visible){
+          pushMatrix();
+          translate(-xo,-yo);
+          if (buttonValue%2 == 0) {
+            hexagon[i][j].displayPics();
+          } else hexagon[i][j].displayMosaic();
+          popMatrix();
       }
     }
   }
@@ -233,3 +240,12 @@ void mouseClicked() {
         yo = height/2;
     }
   }
+
+  void mousePressed() {
+  if (button.over()) {
+    buttonValue +=1;
+    if (buttonValue%2 == 0) {
+      button = new Button(60, 60, "Picture Mode");
+    } else button = new Button(60, 60, "Mosaic Mode");
+  }
+} 
