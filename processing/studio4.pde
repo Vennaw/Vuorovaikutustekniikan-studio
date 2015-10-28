@@ -21,7 +21,7 @@ void setup() {
   background(255);
   frameRate(50); //Specifies the number of frames to be displayed every second.
   hexcountx = parseInt(width/(rad));
-  hexcounty = parseInt(height/(rad));
+  hexcounty = parseInt(width/(rad));
   resetCanvas();
 }
 
@@ -102,32 +102,32 @@ void addRelatedArtists(int i, int j, boolean oddColumn, boolean oddRow, String[]
       }else{
         string imgurl = array[k].images[0].url;
       }
-      if(!hexagon[a][b].visible){
+      if(hexagon[a][b] != null && !hexagon[a][b].visible){
         addNewArtist(null, array[k]);
         hexagon[a][b].setArtist(array[k].id, imgurl);
         hexagon[a][b].visible = true;
 
-      }else if(!hexagon[c][d].visible){
+      }else if(hexagon[c][d] != null && !hexagon[c][d].visible){
         addNewArtist(null, array[k]);
         hexagon[c][d].setArtist(array[k].id, imgurl);
         hexagon[c][d].visible = true;
           
-      }else if(!hexagon[e][f].visible){
+      }else if(hexagon[e][f] != null && !hexagon[e][f].visible){
         addNewArtist(null, array[k]);
         hexagon[e][f].setArtist(array[k].id, imgurl);
         hexagon[e][f].visible = true;
           
-      }else if(!hexagon[g][h].visible){
+      }else if(hexagon[g][h] != null && !hexagon[g][h].visible){
         addNewArtist(null, array[k]);
         hexagon[g][h].setArtist(array[k].id, imgurl);
         hexagon[g][h].visible = true;
           
-      }else if(!hexagon[o][p].visible){
+      }else if(hexagon[o][p] != null && !hexagon[o][p].visible){
         addNewArtist(null, array[k]);
         hexagon[o][p].setArtist(array[k].id, imgurl);
         hexagon[o][p].visible = true;
           
-      }else if(!hexagon[q][r].visible){
+      }else if(hexagon[q][r] != null && !hexagon[q][r].visible){
         addNewArtist(null, array[k]);
         hexagon[q][r].setArtist(array[k].id, imgurl);
         hexagon[q][r].visible = true;
@@ -147,15 +147,15 @@ void addRelatedArtists(int i, int j, boolean oddColumn, boolean oddRow, String[]
 void draw() {
   background(255);
 
-  translate(xo, yo);
-  scale(zoom);
-  translate(-xo, -yo);
+  float cursorX = (mouseX-xo)/zoom + xo;
+  float cursorY = (mouseY-yo)/zoom + yo;
 
+  translate(xo,yo);
+  scale(zoom);
 
   for (int i = 0; i < hexcountx; i ++ ) {     
     for (int j = 0; j < hexcounty; j ++ ) {
-      
-      if (hexagon[i][j].isInside() && hexagon[i][j].visible){
+      if (hexagon[i][j].isInside(cursorX, cursorY) && hexagon[i][j].visible){
         hexagon[i][j].hoover = true;
         for (int k = 0; k < artists.size(); k++){
           if (artists.get(k).data.id == hexagon[i][j].artistID)
@@ -163,18 +163,23 @@ void draw() {
         }
       } else {
         hexagon[i][j].hoover = false;
-      }
-
-      if(hexagon[i][j].visible){
+      }if(hexagon[i][j].visible){
+        pushMatrix();
+        translate(-xo,-yo);
         hexagon[i][j].display();
+        popMatrix();
       }
-      }
-    }    
+    }
+  }
+  
+
+
+
 }
 
 void setSeedArtist(){
-  int hexX = parseInt(hexcountx/4);
-  int hexY = parseInt(hexcounty/3);
+  int hexX = parseInt(hexcountx/5.75);
+  int hexY = parseInt(hexcounty/2);
   
   if(artists.get(0).data.images.length != 0){
     hexagon[hexX][hexY].setArtist(artists.get(0).data.id, artists.get(0).data.images[0].url, artists.g); 
@@ -196,9 +201,11 @@ void setSeedArtist(){
 
 
 void mouseClicked() {
+  float cursorX = (mouseX-xo)/zoom + xo;
+  float cursorY = (mouseY-yo)/zoom + yo;
   for (int i = 0; i < hexcountx; i ++ ) {     
     for (int j = 0; j < hexcounty; j ++ ) {
-      if (hexagon[i][j].isInside(mouseX, mouseY) && hexagon[i][j].visible){
+      if (hexagon[i][j].isInside(cursorX, cursorY) && hexagon[i][j].visible){
         if (i % 2 == 0 && j % 2 == 0) {
           getRelatedArtists(i, j, false, false, hexagon[i][j].artistID);
         } else if(i%2 == 0 && j % 2 != 0){

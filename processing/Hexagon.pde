@@ -58,10 +58,10 @@ class Hexagon {
   void hoovers() {
   }
   
-  boolean isInside() {
-    float xDist = abs(x - mouseX);
-    float yDist = abs(y - mouseY);
-    if (xDist < (radi - 15) && yDist < (radi - 15)){
+  boolean isInside(cursorX, cursorY) {
+    float xDist = abs(x - cursorX);
+    float yDist = abs(y - cursorY);
+    if (xDist < (radi - 8) && yDist < (radi - 8)){
     return true;
     } else {
     return false;
