@@ -2,6 +2,12 @@
 var spotifyUrl = "https://api.spotify.com/v1/";
 var seedRelateds;
 
+function changeMode(radio){
+
+  var val = radio.value;
+    console.log(val);
+  pjs.setMode(val);
+} 
 
 function getSimilarityIndex(hexagon, id){
   getRelatedArtistData(id, function(data){

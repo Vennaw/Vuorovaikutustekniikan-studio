@@ -33,7 +33,19 @@
 
 	Search artist: <input id="searchField" type="text" name="artist" placeholder="Enter artist name"><br>
 	<button onclick="getArtist()">Get data</button>
-	
+	<div class="radio">
+  		<label>
+    		<input type="radio" name="optionsRadios" id="optionsRadios1" value="1" onclick="changeMode(this);">
+    		Image mode
+  		</label>
+		</div>
+	<div class="radio">
+  		<label>
+    		<input type="radio" name="optionsRadios" id="optionsRadios2"
+    		onclick="changeMode(this);" value="2" checked>
+    		Mosaic mode
+  		</label>
+	</div>
 
 	<canvas id="mycanvas" data-processing-sources="processing/studio4.pde processing/Hexagon.pde processing/Artist.pde"></canvas>
 

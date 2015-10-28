@@ -7,8 +7,9 @@ float zoom = 1;
 float xo;
 float yo;
 ArrayList artists;
+int buttonValue; 
 
-int buttonValue = 1;
+int buttonValue = 2;
 boolean isOpen;
 int myColorBackground = color(0,0,0);
 
@@ -18,6 +19,7 @@ void setup() {
   xo = width/2;
   yo = height/2;
   smooth();
+
 
   background(255);
   frameRate(50); //Specifies the number of frames to be displayed every second.
@@ -40,6 +42,10 @@ void resetCanvas(){
       }
     }
   }
+}
+
+void setMode(int value){
+  buttonValue = value;
 }
 
 void addNewArtist(int index, String str){
@@ -172,17 +178,17 @@ void draw() {
 
     pushMatrix();
     translate(-xo,-yo);
-    hex.display();
+    if (buttonValue == 1) {
+            hex.displayPics();
+          } else hex.displayMosaic();
     popMatrix();
 
   }
-      
-    
-  
-
-
 
 }
+
+
+
 
 void setSeedArtist(){
   int hexX = parseInt(hexcountx/5.75);
@@ -241,3 +247,5 @@ void mouseClicked() {
         yo = height/2;
     }
   }
+
+
