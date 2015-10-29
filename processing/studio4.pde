@@ -6,6 +6,8 @@ int hexcountx, hexcounty;
 float zoom = 1;
 float xo;
 float yo;
+float xpos;
+float ypos;
 ArrayList artists;
 int buttonValue; 
 
@@ -159,10 +161,10 @@ void addRelatedArtists(int i, int j, boolean oddColumn, boolean oddRow, String[]
 void draw() {
   background(255);
 
-  float cursorX = (mouseX-xo)/zoom + xo;
-  float cursorY = (mouseY-yo)/zoom + yo;
+  float cursorX = (mouseX-xo-xpos)/zoom + xo + xpos;
+  float cursorY = (mouseY-yo-ypos)/zoom + yo + ypos;
 
-  translate(xo,yo);
+  translate(xo + xpos, yo + ypos);
   scale(zoom);
 
   for(Hexagon hex : visibleHexagons){
@@ -177,7 +179,7 @@ void draw() {
       }
 
     pushMatrix();
-    translate(-xo,-yo);
+    translate(-xo - xpos, -yo -ypos);
     if (buttonValue == 1) {
             hex.displayPics();
           } else hex.displayMosaic();
@@ -215,8 +217,8 @@ void setSeedArtist(){
 
 
 void mouseClicked() {
-  float cursorX = (mouseX-xo)/zoom + xo;
-  float cursorY = (mouseY-yo)/zoom + yo;
+  float cursorX = (mouseX-xo-xpos)/zoom + xo + xpos;
+  float cursorY = (mouseY-yo-ypos)/zoom + yo + ypos;
   for (int i = 0; i < hexcountx; i ++ ) {     
     for (int j = 0; j < hexcounty; j ++ ) {
       if (hexagon[i][j].isInside(cursorX, cursorY) && hexagon[i][j].visible){
@@ -245,7 +247,33 @@ void mouseClicked() {
         zoom = 1;
         xo = width/2;
         yo = height/2;
-    }
+      } else if (key == CODED){
+        if (keyCode == UP){
+          if (zoom > 1){
+            ypos += 25;
+          } else {
+            ypos -= 25;
+          }
+        } else if (keyCode == DOWN){
+          if (zoom > 1){
+            ypos -= 25;
+          } else {
+            ypos += 25;
+          }
+        } else if (keyCode == LEFT){
+          if (zoom > 1){
+            xpos += 25;
+          } else {
+            xpos -= 25;
+          }
+        } else if (keyCode == RIGHT){
+          if (zoom > 1){
+            xpos -= 25;
+          } else {
+            xpos += 25;
+          }
+        }
+      }
   }
 
 
