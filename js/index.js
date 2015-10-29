@@ -7,7 +7,11 @@ function changeMode(radio){
   var val = radio.value;
     console.log(val);
   pjs.setMode(val);
-} 
+}
+
+function hideCanvas(){
+  $("#mycanvas").addClass("hidden");
+}
 
 function getSimilarityIndex(hexagon, id){
   getRelatedArtistData(id, function(data){
@@ -39,7 +43,9 @@ function getArtist(id){
 	$.getJSON(url, args,
             function(data) {
                 var json = JSON.stringify(data,null,"\t");
-                pjs.resetCanvas();
+                $("#mycanvas").removeClass("hidden");
+                $(".collapsable").collapse("toggle");
+                pjs.setup();
                 if(args){
                   if(data.artists.items.length == 0){
                     alert("No results found!");
@@ -82,6 +88,12 @@ function getArtistImage(id){
       }
     }
   }
+}
+
+function inputKeyUp(event){
+    if(event.keyCode == 13){
+      getArtist();
+    }
 }
 
 function getRelatedArtists(i, j, oddColumn, oddRow, artistID){

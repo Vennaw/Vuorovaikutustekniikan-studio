@@ -17,7 +17,7 @@ int myColorBackground = color(0,0,0);
 
 
 void setup() {
-  size(1200, 800);
+  size($("#mycanvas").width(), $("#mycanvas").height());
   xo = width/2;
   yo = height/2;
   smooth();
@@ -190,8 +190,8 @@ void draw() {
 
 
 void setSeedArtist(){
-  int hexX = parseInt(hexcountx/5.75);
-  int hexY = parseInt(hexcounty/2);
+  int hexX = parseInt(hexcountx/5.5);
+  int hexY = parseInt(hexcounty/3);
   
   if(artists.get(0).data.images.length != 0){
     hexagon[hexX][hexY].setArtist(artists.get(0).data.id, artists.get(0).data.images[0].url, artists.g); 
@@ -214,8 +214,8 @@ void setSeedArtist(){
 
 
 void mouseClicked() {
-  float cursorX = (mouseX-xo-xpos)/zoom + xo + xpos;
-  float cursorY = (mouseY-yo-ypos)/zoom + yo + ypos;
+  float cursorX = (mouseX-xo-xpos)/zoom + xo;
+  float cursorY = (mouseY-yo-ypos)/zoom + yo;
   for (int i = 0; i < hexcountx; i ++ ) {     
     for (int j = 0; j < hexcounty; j ++ ) {
       if (hexagon[i][j].isInside(cursorX, cursorY) && hexagon[i][j].visible){
@@ -246,29 +246,13 @@ void mouseClicked() {
         yo = height/2;
       } else if (key == CODED){
         if (keyCode == UP){
-          if (zoom > 1){
-            ypos += 25;
-          } else {
             ypos -= 25;
-          }
         } else if (keyCode == DOWN){
-          if (zoom > 1){
-            ypos -= 25;
-          } else {
             ypos += 25;
-          }
         } else if (keyCode == LEFT){
-          if (zoom > 1){
-            xpos += 25;
-          } else {
             xpos -= 25;
-          }
         } else if (keyCode == RIGHT){
-          if (zoom > 1){
-            xpos -= 25;
-          } else {
             xpos += 25;
-          }
         }
       }
   }
