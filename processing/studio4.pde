@@ -6,8 +6,8 @@ int hexcountx, hexcounty;
 float zoom = 1;
 float xo;
 float yo;
-float xpos;
-float ypos;
+int xpos = 0;
+int ypos = 0;
 ArrayList artists;
 int buttonValue; 
 
@@ -152,19 +152,16 @@ void addRelatedArtists(int i, int j, boolean oddColumn, boolean oddRow, String[]
       }
     } 
   }
-      
-
-  //TODO: Check if hexagon is inside the canvas (otherwise undefined error...)
 }
 
 
 void draw() {
   background(255);
 
-  float cursorX = (mouseX-xo-xpos)/zoom + xo + xpos;
-  float cursorY = (mouseY-yo-ypos)/zoom + yo + ypos;
+  float cursorX = (mouseX-xo-xpos)/zoom + xo;
+  float cursorY = (mouseY-yo-ypos)/zoom + yo;
 
-  translate(xo + xpos, yo + ypos);
+  translate(xo+xpos, yo+ypos);
   scale(zoom);
 
   for(Hexagon hex : visibleHexagons){
@@ -179,10 +176,10 @@ void draw() {
       }
 
     pushMatrix();
-    translate(-xo - xpos, -yo -ypos);
+    translate(-xo, -yo);
     if (buttonValue == 1) {
-            hex.displayPics();
-          } else hex.displayMosaic();
+      hex.displayPics();
+    } else hex.displayMosaic();
     popMatrix();
 
   }

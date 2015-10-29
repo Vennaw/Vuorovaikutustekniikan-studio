@@ -56,7 +56,7 @@ $(document).ready(function(){
     var recording = false;
     var hasPri = false;
     var safari = false;
-    var hasres = false;
+    var hasRes = false;
     startRecording();
 
     var intervalKey;
