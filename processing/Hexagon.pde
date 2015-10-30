@@ -25,19 +25,18 @@ class Hexagon {
       y + radi * sin(radians(angle * i)));
     }
     colorMode(RGB, 255);
+    stroke(226,227,225);
     fill(175,244, 18, this.similarity * 255);
     if (hoover){
       fill(100,50,50,150);
     }
-    if(img){
-      textSize(14);
-      textAlign(CENTER, CENTER);
-      rectMode(CENTER);
-      stroke(255);
-      text(artistName, x - picDiameter/3.2, y - picDiameter/3.2, picDiameter/1.6, picDiameter/1.6);
-    }
-    
     endShape(CLOSE);
+
+    fill(66,66,66,60);
+    textSize(14);
+    textAlign(CENTER, CENTER);
+    rectMode(CENTER);
+    text(artistName, x - picDiameter/3.2, y - picDiameter/3.2, picDiameter/1.6, picDiameter/1.6);
 
     if(hoover){
       fill(255);
