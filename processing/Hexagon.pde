@@ -25,7 +25,7 @@ class Hexagon {
       y + radi * sin(radians(angle * i)));
     }
     colorMode(RGB, 255);
-    fill(75,250,40, this.similarity * 255);
+    fill(175,244, 18, this.similarity * 255);
     if (hoover){
       fill(100,50,50,150);
     }
@@ -33,6 +33,7 @@ class Hexagon {
       textSize(14);
       textAlign(CENTER, CENTER);
       rectMode(CENTER);
+      stroke(255);
       text(artistName, x - picDiameter/3.2, y - picDiameter/3.2, picDiameter/1.6, picDiameter/1.6);
     }
     
@@ -54,6 +55,7 @@ class Hexagon {
       y + radi * sin(radians(angle * i)));
     }
     colorMode(RGB, 255);
+    stroke(0);
     noFill();
     if (hoover){
       fill(100,50,50,150);

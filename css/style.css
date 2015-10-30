@@ -5,12 +5,19 @@
 	width: 100%;
 }
 
+#logo{
+	margin-top: 3%;
+	margin-left: 6.5%;
+
+}
+
 #searchtools{
 	height: 90%;
 }
 
 #newSearch{
     margin: 2%;
+    
 }
 
 #top{
@@ -20,4 +27,19 @@
 .radio{
 	padding-top: 1.5%;
     float: left;
+
+}
+
+.container-kv-main{
+    text-align: center;
+}
+
+.panel-title{
+	margin: 1%;
+	font-family: Verdana, sans-serif;
+	font-size: 16px;
+}
+
+#searchField{
+	margin: 1%;
 }

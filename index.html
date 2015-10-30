@@ -34,23 +34,23 @@
 </div>
 <div class="collapsable collapse in" id="searchtools">
 
-	<div class="container kv-main">
-	<h1>Artist visualizer</h1>
-	<div class="panel-heading">
-		<h4 class="panel-title">Play some music and click the green button to recognize.</h4>
-	</div>
-	<hr>
-	<div class="text-center center-block">
-		<button id="record" class="button button-circle button-action button-jumbo"><i class="fa fa-microphone"></i></button>
-	</div>
-	<hr>
-	<div id="message"></div>
-	<div class="text-center" id="result2"></div>
-	<hr>
-	<h4 class="panel-title">Or type artist in the field and press "Get data".</h4>
+	<div class="container-kv-main">
+		<img id="logo" src="logo3small.png" alt="Artist Visualizer">
+		<div class="panel-heading">
+			<h4 class="panel-title">Play some music and click the green button to recognize</h4>
+		</div>
+		<hr>
+		<div class="text-center center-block">
+			<button id="record" class="button button-circle button-action button-jumbo"><i class="fa fa-microphone"></i></button>
+		</div>
+		<hr>
+		<div id="message"></div>
+		<div class="text-center" id="result2"></div>
+		<hr>
+		<h4 class="panel-title">Or type artist in the field and press "Get data"</h4>
 
-	Search artist: <input id="searchField" type="text" name="artist" placeholder="Enter artist name" onkeyup="inputKeyUp(event)"><br>
-	<button id="getData" onclick="getArtist()">Get data</button>
+		Search artist: <input id="searchField" type="text" name="artist" placeholder="Enter artist name" onkeyup="inputKeyUp(event)"><br>
+		<button id="getData" onclick="getArtist()">Get data</button>
 	</div>
 </div>
 
