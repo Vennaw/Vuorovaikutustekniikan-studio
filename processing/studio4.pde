@@ -165,12 +165,12 @@ void draw() {
   scale(zoom);
 
   for(Hexagon hex : visibleHexagons){
-    if (hex.isInside(cursorX, cursorY)){
-        hex.hoover = true;
-        for (Artist artist : artists){
+    for (Artist artist : artists){
           if (artist.data.id == hex.artistID)
             hex.artistName = artist.data.name;
-        }
+    }
+    if (hex.isInside(cursorX, cursorY)){
+        hex.hoover = true;
       } else {
         hex.hoover = false;
       }
